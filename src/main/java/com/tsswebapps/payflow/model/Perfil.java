@@ -3,6 +3,8 @@ package com.tsswebapps.payflow.model;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -17,8 +19,27 @@ public class Perfil implements GrantedAuthority {
     private Long id;
 
     private String descricao;
+    
+    @ManyToMany(mappedBy = "perfils")
+    private List<Usuario> usuarios;
 
-    @Override
+    public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
+
+	@Override
     public String getAuthority() {
         // TODO Auto-generated method stub
         return this.descricao;
